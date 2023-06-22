@@ -1,0 +1,16 @@
+.card__image{
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    height: 282px;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    transition: filter .3s linear;
+    background-size: cover;
+    background-position: center;
+}
+
+.card__image:hover{
+    filter: brightness(50%);
+}
+

@@ -1,0 +1,40 @@
+.header__burger-btn{
+    display: none;
+}
+
+@media screen and (max-width: 700px){
+    .header__burger-btn{
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 0;
+        margin-right: 30px;
+        display: block;
+    }
+
+    .header__burger-btn::before{
+        content: '';
+        position: absolute;
+        width: 24px;
+        top: 6px;
+        background-color: white;
+        height: 3px;
+    }
+
+    .header__burger-btn span {
+        position: absolute;
+        top: 14px;
+        width: 24px;
+        height: 3px;
+        background-color: white;
+    }
+
+    .header__burger-btn::after{
+        content: '';
+        position: absolute;
+        width: 24px;
+        bottom: -1px;
+        background-color: white;
+        height: 3px;
+    }
+}

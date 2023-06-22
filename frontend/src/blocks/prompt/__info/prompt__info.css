@@ -1,0 +1,13 @@
+.prompt__info{
+    padding: 60px 36px;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 425px) {
+    .prompt__info{
+        padding: 50px 18px;
+        gap: 40px;
+    }
+}

@@ -1,0 +1,22 @@
+.profile__button_type_edit{
+    margin: 0;
+    padding: 0;
+    background-image: url(../../../../images/profile/pen.svg);
+    background-repeat: no-repeat;
+    align-self: flex-end;
+    background-position: center;
+    width: 24px;
+    min-height: 24px;
+    margin-bottom: 9px;
+    flex: none;
+}
+
+
+@media screen and (max-width: 425px) {
+    .profile__button_type_edit{
+        background-size: 7.5px;
+        min-height: 18px;
+        width: 18px;
+        margin-bottom: 7px;
+    }
+}

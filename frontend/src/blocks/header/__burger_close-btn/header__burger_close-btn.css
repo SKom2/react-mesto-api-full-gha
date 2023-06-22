@@ -1,0 +1,15 @@
+.header__burger-close-btn{
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+    .header__burger-close-btn{
+        display: block;
+        width: 20px;
+        height: 20px;
+        transition: opacity .1s linear;
+        border: none;
+        cursor: pointer;
+        margin: auto 30px auto auto;
+    }
+}
