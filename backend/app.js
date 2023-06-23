@@ -10,15 +10,8 @@ mongoose.set('toJSON', { useProjection: true });
 mongoose.connect(CONNECT_ADDRESS);
 const app = express();
 
-const allowedCors = [
-  'http://mesto-otdiha.nomoredomains.rocks'
-];
-
 app.use((req, res, next) => {
-  const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', '*');
 
   next();
 });
