@@ -11,7 +11,7 @@ mongoose.connect(CONNECT_ADDRESS);
 const app = express();
 
 const allowedCors = [
-  'http://api.mesto-otdiha.nomoredomains.work'
+  'http://mesto-otdiha.nomoredomains.rocks'
 ];
 
 app.use((req, res, next) => {
