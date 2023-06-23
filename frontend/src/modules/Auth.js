@@ -6,7 +6,7 @@ const makeRequest = (url, method, body, token) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-},
+}
     }
 
     if (body) {
