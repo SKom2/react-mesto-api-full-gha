@@ -1,4 +1,8 @@
 export class Api {
+    setToken(token) {
+        this._config.headers.Authorization = `Bearer ${token}`;
+    }
+
     constructor(config) {
         this._config = config;
     }

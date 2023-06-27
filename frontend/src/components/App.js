@@ -17,6 +17,7 @@ import {InfoToolTip} from "./InfoToolTip";
 import * as Auth from "../modules/Auth";
 import {NavBar} from "./NavBar";
 import {Header} from "./Header";
+const api = new Api(apiConfig);
 
 function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -40,43 +41,51 @@ function App() {
     const [token, setToken] = useState('')
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const api = new Api(apiConfig);
 
     const navigate = useNavigate()
 
     useEffect(() => {
         const jwt = localStorage.getItem('jwt')
         setToken(jwt)
-    }, [])
+        if (token) {
+            Auth.getContent(token)
+                .then((res) => {
+                    setIsLoggedIn(true);
+                    setUserData({email: res.email});
+                    navigate("/", {replace: true});
+                })
+                .catch(err => console.log(`Ошибка получения данных пользователя: ${err}`));
+        }
 
-    useEffect(() => {
-        if (!token) {
-            return;
-        }
-        Auth.getContent(token).then((res) => {
-            setIsLoggedIn(true);
-            setUserData({email: res.data.email})
-            navigate("/", {replace: true})
-        });
-        if (isLoggedIn) {
-            api.getProfile()
-                .then((userData) => {
-                    setCurrentUser(userData)
-                })
-                .catch(err => console.log(`Ошибка получения данных пользователя: ${err}`))
-            api.getCards()
-                .then((cardsData) => {
-                    setCards(cardsData);
-                })
-                .catch(err => console.log(`Ошибка получения карточек: ${err}`))
-        }
         const handleResize = () => {
             setIsDesktop(window.innerWidth >= 700);
         };
 
         window.addEventListener("resize", handleResize);
 
-    }, [api, isLoggedIn, navigate, token])
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [isLoggedIn, token, navigate])
+
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            return;
+        }
+        api.getProfile()
+            .then((userData) => {
+                setCurrentUser(userData);
+            })
+            .catch(err => console.log(`Ошибка получения данных пользователя: ${err}`));
+
+        api.getCards()
+            .then((cardsData) => {
+                setCards(cardsData);
+            })
+            .catch(err => console.log(`Ошибка получения карточек: ${err}`));
+
+    }, [api, isLoggedIn, token, navigate]);
 
     function handleMenuIconClick() {
         setMenuOpened(!isMenuOpened);
@@ -156,8 +165,9 @@ function App() {
     }
 
     function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-
+        console.log(currentUser)
+        const isLiked = card.likes.some(i => i === currentUser._id);
+        console.log(isLiked)
         if (isLiked) {
             api.handleControlLikes("DELETE", card._id)
                 .then((newCard) => {
@@ -167,6 +177,7 @@ function App() {
         } else {
             api.handleControlLikes("PUT", card._id)
                 .then((newCard) => {
+                    console.log(newCard)
                     setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
                 })
                 .catch(err => console.log(`Ошибка добавления лайка: ${err}`))
@@ -216,6 +227,7 @@ function App() {
         setLoadState(true)
         api.addCard(data)
             .then((newCard) => {
+                console.log(newCard)
                 setCards([newCard, ...cards])
                 closeAllPopups()
             })
