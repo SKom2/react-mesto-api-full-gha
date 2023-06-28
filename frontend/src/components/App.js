@@ -48,6 +48,7 @@ function App() {
         const jwt = localStorage.getItem('jwt')
         setToken(jwt)
         if (token) {
+            api.setToken(token);
             Auth.getContent(token)
                 .then((res) => {
                     setIsLoggedIn(true);
@@ -85,7 +86,7 @@ function App() {
             })
             .catch(err => console.log(`Ошибка получения карточек: ${err}`));
 
-    }, [api, isLoggedIn, token, navigate]);
+    }, [isLoggedIn, token, navigate]);
 
     function handleMenuIconClick() {
         setMenuOpened(!isMenuOpened);
