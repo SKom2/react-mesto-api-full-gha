@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const router = require('./routes');
 
-const { CONNECT_ADDRESS = 'mongodb://127.0.0.1:27017/mestodb', PORT = 3005 } = process.env;
+const { CONNECT_ADDRESS = 'mongodb://127.0.0.1:27017/mestodb', PORT = 3000 } = process.env;
 
 mongoose.set('toJSON', { useProjection: true });
 mongoose.connect(CONNECT_ADDRESS);
