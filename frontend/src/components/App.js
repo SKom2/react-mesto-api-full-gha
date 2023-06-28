@@ -165,9 +165,7 @@ function App() {
     }
 
     function handleCardLike(card) {
-        console.log(currentUser)
         const isLiked = card.likes.some(i => i === currentUser._id);
-        console.log(isLiked)
         if (isLiked) {
             api.handleControlLikes("DELETE", card._id)
                 .then((newCard) => {
@@ -177,7 +175,6 @@ function App() {
         } else {
             api.handleControlLikes("PUT", card._id)
                 .then((newCard) => {
-                    console.log(newCard)
                     setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
                 })
                 .catch(err => console.log(`Ошибка добавления лайка: ${err}`))
