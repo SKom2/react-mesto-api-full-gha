@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.9.139
+IP 158.160.9.139
 
 Frontend https://mesto-otdiha.nomoredomains.rocks
 
