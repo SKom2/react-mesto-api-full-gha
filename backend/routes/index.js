@@ -1,12 +1,11 @@
 const router = require('express').Router();
-const { errorLogger } = require('express-winston');
 const userRouter = require('./users');
 const cardRouter = require('./cards');
 const { NOT_FOUND } = require('../constants/ErrorStatuses');
 const userController = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const { validateUserBody } = require('../middlewares/validate');
-const { requestLogger } = require('../middlewares/logger');
+const { requestLogger, errorLogger } = require('../middlewares/logger');
 
 router.use(requestLogger);
 
