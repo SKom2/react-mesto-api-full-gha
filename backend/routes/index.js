@@ -24,10 +24,10 @@ router.use(auth);
 router.use('/users', userRouter);
 router.use('/cards', cardRouter);
 
-router.use(errorLogger);
-
 router.use((req, res) => {
   res.status(NOT_FOUND).send({ message: 'Запрашиваемая страница не найдена' });
 });
+
+router.use(errorLogger);
 
 module.exports = router;
