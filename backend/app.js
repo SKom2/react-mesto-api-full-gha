@@ -31,7 +31,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
-
+app.use(router);
+app.use(errors());
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
@@ -44,8 +45,6 @@ app.use((err, req, res, next) => {
         : message
     });
 });
-app.use(router);
-app.use(errors());
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
