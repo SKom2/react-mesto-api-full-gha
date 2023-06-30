@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.mesto-otdiha.nomoredomains.work';
+export const BASE_URL = 'https://api.mesto-otdiha.nomoredomains.work';
 
 const makeRequest = (url, method, body, token) => {
     const options = {
