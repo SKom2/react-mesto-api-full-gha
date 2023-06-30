@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="112f3ca4-d8d8-464c-8245-f456a4361694" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/errors/bad-request-err.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/errors/conflict-error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/errors/forbidden-err.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/errors/internal-server-err.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/errors/not-found-err.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/errors/unauthorized-err.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/constants/ErrorStatuses.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/constants/ErrorStatuses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/cards.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/cards.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/wrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/middlewares/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middlewares/validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/card.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +51,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/PET/Сотрудники&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/san4e/dev/react-mesto-api-full-gha&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -71,6 +87,8 @@
       <workItem from="1687966753919" duration="4120000" />
       <workItem from="1688018204014" duration="3239000" />
       <workItem from="1688109354327" duration="2299000" />
+      <workItem from="1688114015626" duration="4991000" />
+      <workItem from="1688129351542" duration="4352000" />
     </task>
     <servers />
   </component>

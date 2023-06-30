@@ -4,14 +4,14 @@ const User = require('../models/user');
 const wrapper = require('./wrapper');
 const {
   CREATE,
-  SUCCESS,
-  UNAUTHORIZED
+  SUCCESS
 } = require('../constants/ErrorStatuses');
+const Unauthorized = require('../errors/unauthorized-err');
 
 const SALT_ROUNDS = 10;
 const { SECRET_KEY = 'some-secret-key' } = process.env;
 
-const createUser = (req, res) => {
+const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password
   } = req.body;
@@ -19,11 +19,11 @@ const createUser = (req, res) => {
   bcrypt.hash(password, SALT_ROUNDS).then((hash) => {
     wrapper(() => User.create({
       name, about, avatar, email, password: hash
-    }), CREATE)(req, res);
+    }), CREATE)(req, res, next);
   });
 };
 
-const login = (req, res) => {
+const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -36,7 +36,7 @@ const login = (req, res) => {
       res.status(SUCCESS).send({ token });
     })
     .catch((err) => {
-      res.status(UNAUTHORIZED).send({ message: err.message });
+      next(new Unauthorized(err.message));
     });
 };
 

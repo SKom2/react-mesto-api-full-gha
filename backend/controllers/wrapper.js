@@ -1,42 +1,34 @@
 const mongoose = require('mongoose');
 const {
-  NOT_FOUND,
-  SUCCESS,
-  BAD_REQUEST,
-  CONFLICT,
-  INTERNAL_SERVER_ERROR
+  SUCCESS
 } = require('../constants/ErrorStatuses');
+const NotFoundError = require('../errors/not-found-err');
+const ConflictError = require('../errors/conflict-error');
+const BadRequest = require('../errors/bad-request-err');
 
 const MONGO_DUPLICATE_KEY_ERROR = 11000;
 
-const wrapper = (handler, successStatus = SUCCESS) => (req, res) => {
+const wrapper = (handler, successStatus = SUCCESS) => (req, res, next) => {
   handler(req, res)
     .then((result) => {
       if (!result) {
-        res.status(NOT_FOUND).send({ message: 'Card Id not found' });
+        next(new NotFoundError('Card Id not found'));
         return;
       }
       res.status(successStatus).send(result);
     })
     .catch((err) => {
       if (err.code === MONGO_DUPLICATE_KEY_ERROR) {
-        res.status(CONFLICT).send({ message: 'This user already exists' });
+        next(new ConflictError('This user already exists'));
         return;
       }
       if (err instanceof mongoose.Error.CastError) {
-        res.status(BAD_REQUEST).send({ message: 'Invalid User Id' });
+        next(new BadRequest('Invalid User Id'));
         return;
       }
       if (err instanceof mongoose.Error.ValidationError) {
-        res.status(BAD_REQUEST).send({
-          message: 'Incorrect data sent'
-        });
-        return;
+        next(new BadRequest('Incorrect data sent'));
       }
-      res.status(INTERNAL_SERVER_ERROR).send({
-        message: 'An error occurred on the server',
-        stack: err.stack
-      });
     });
 };
 

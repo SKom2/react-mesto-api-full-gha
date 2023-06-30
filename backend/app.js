@@ -31,6 +31,19 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
+
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message } = err;
+
+  res
+    .status(statusCode)
+    .send({
+      message: statusCode === 500
+        ? 'An error occurred on the server'
+        : message
+    });
+});
 app.use(router);
 app.use(errors());
 

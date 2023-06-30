@@ -5,7 +5,7 @@ const validateUserBody = celebrate({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
     avatar: Joi.string().custom((value, helpers) => {
-      if (!/^https?:\/\/.*$/.test(value)) {
+      if (!/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/.test(value)) {
         return helpers.error('any.invalid');
       }
       return value;
@@ -25,7 +25,7 @@ const validateUserEdit = celebrate({
 const validateUserAvatarEdit = celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().custom((value, helpers) => {
-      if (!/^https?:\/\/.*$/.test(value)) {
+      if (!/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/.test(value)) {
         return helpers.error('any.invalid');
       }
       return value;
@@ -37,7 +37,7 @@ const validateCardBody = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     link: Joi.string().required().custom((value, helpers) => {
-      if (!/^https?:\/\/.*$/.test(value)) {
+      if (!/(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/.test(value)) {
         return helpers.error('any.invalid');
       }
       return value;

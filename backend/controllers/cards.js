@@ -2,10 +2,10 @@ const Card = require('../models/card');
 const wrapper = require('./wrapper');
 const {
   CREATE,
-  NOT_FOUND,
-  INTERNAL_SERVER_ERROR,
   SUCCESS
 } = require('../constants/ErrorStatuses');
+const ForbiddenErr = require('../errors/forbidden-err');
+const NotFoundError = require('../errors/not-found-err');
 
 const getCards = wrapper(() => Card.find({}));
 
@@ -14,13 +14,13 @@ const createCards = wrapper((req) => Card.create({
   ...req.body
 }), CREATE);
 
-const deleteCard = (req, res) => {
+const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
 
   Card.findById(cardId)
     .then((card) => {
       if (!card) {
-        res.status(NOT_FOUND).send({ message: 'Card Id not found' });
+        next(new NotFoundError('Card Id not found'));
         return;
       }
 
@@ -28,7 +28,7 @@ const deleteCard = (req, res) => {
       const userId = req.user._id;
 
       if (ownerId !== userId) {
-        res.status(403).send({ message: 'You do not have permission to delete this card' });
+        next(new ForbiddenErr('You do not have permission to delete this card'));
         return;
       }
 
@@ -37,19 +37,7 @@ const deleteCard = (req, res) => {
           if (result) {
             res.status(SUCCESS).send(result);
           }
-        })
-        .catch((err) => {
-          res.status(INTERNAL_SERVER_ERROR).send({
-            message: 'An error occurred on the server',
-            stack: err.stack
-          });
         });
-    })
-    .catch((err) => {
-      res.status(INTERNAL_SERVER_ERROR).send({
-        message: 'An error occurred on the server',
-        stack: err.stack
-      });
     });
 };
 
