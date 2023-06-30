@@ -1,7 +1,7 @@
 const { INTERNAL_SERVER_ERROR } = require('../constants/ErrorStatuses');
 
 class InternalServerErr extends Error {
-  constructor(message, stack) {
+  constructor(message) {
     super(message);
     this.statusCode = INTERNAL_SERVER_ERROR;
     Error.captureStackTrace(this, InternalServerErr);
