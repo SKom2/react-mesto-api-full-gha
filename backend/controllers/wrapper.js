@@ -20,14 +20,12 @@ const wrapper = (handler, successStatus = SUCCESS) => (req, res, next) => {
     .catch((err) => {
       if (err.code === MONGO_DUPLICATE_KEY_ERROR) {
         next(new ConflictError('This user already exists'));
-        return;
-      }
-      if (err instanceof mongoose.Error.CastError) {
+      } else if (err instanceof mongoose.Error.CastError) {
         next(new BadRequest('Invalid User Id'));
-        return;
-      }
-      if (err instanceof mongoose.Error.ValidationError) {
+      } else if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequest('Incorrect data sent'));
+      } else {
+        next(err);
       }
     });
 };

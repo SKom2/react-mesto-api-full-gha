@@ -37,8 +37,10 @@ const deleteCard = (req, res, next) => {
           if (result) {
             res.status(SUCCESS).send(result);
           }
-        });
-    });
+        })
+        .catch(next);
+    })
+    .catch(next);
 };
 
 const putCardLike = wrapper((req) => {
